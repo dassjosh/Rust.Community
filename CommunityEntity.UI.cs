@@ -329,6 +329,9 @@ public partial class CommunityEntity
                             c.onClick.RemoveAllListeners();
                         c.onClick.AddListener( () => { DestroyPanel( pnlName ); } );
                     }
+                    
+                    if (ShouldUpdateField("interactable"))
+                        c.interactable = obj.GetBoolean( "interactable", true );
 
                     // bg image
                     var img = GetOrAddComponent<UnityEngine.UI.Image>();
@@ -416,6 +419,8 @@ public partial class CommunityEntity
                         c.text = obj.GetString( "text", "Text" );
                     if ( ShouldUpdateField( "readOnly" ) )
                         c.readOnly = obj.GetBoolean( "readOnly", false );
+                    if (ShouldUpdateField("interactable"))
+                        c.interactable = obj.GetBoolean( "interactable", true );
 
                     if (ShouldUpdateField("placeholderId"))
                     {
