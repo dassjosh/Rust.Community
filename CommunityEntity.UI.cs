@@ -846,6 +846,11 @@ public partial class CommunityEntity
                     if (HasField("fadeDuration"))
                         colors.fadeDuration = obj.GetFloat("fadeDuration", 0.1f);
                     
+                    // apply it with fadeDuration of 0 first so the colors instantly apply rather than tweening from img.color
+                    var fadeDur = colors.fadeDuration;
+                    colors.fadeDuration = 0f;
+                    slider.colors = colors;
+                    colors.fadeDuration = fadeDur;
                     slider.colors = colors;
                     
                     if(obj.ContainsKey("handle"))
