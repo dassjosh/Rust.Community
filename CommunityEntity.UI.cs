@@ -204,6 +204,8 @@ public partial class CommunityEntity
                         c.alignment = ParseEnum( obj.GetString( "align" ), TextAnchor.UpperLeft );
                     if ( ShouldUpdateField( "color" ) )
                         c.color = ColorEx.Parse( obj.GetString( "color", "1.0 1.0 1.0 1.0" ) );
+                    if ( ShouldUpdateField( "horizontalOverflow" ) )
+                        c.horizontalOverflow = ParseEnum( obj.GetString( "horizontalOverflow", "Wrap" ), HorizontalWrapMode.Wrap );
                     if ( ShouldUpdateField( "verticalOverflow" ) )
                         c.verticalOverflow = ParseEnum( obj.GetString( "verticalOverflow", "Truncate" ), VerticalWrapMode.Truncate );
 
