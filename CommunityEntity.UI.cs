@@ -813,6 +813,51 @@ public partial class CommunityEntity
                         scrollRect.verticalNormalizedPosition = obj.GetFloat("verticalNormalizedPosition", 0f);
                 break;
                 }
+            
+            case "UnityEngine.Events":
+                {
+                    // Allow the event to be fired on children of this GameObject
+                    bool allowChildren = obj.GetBoolean("allowChildren", false);
+                    void AddOrRemoveEvent<T>(bool add) where T : BaseEventHandler
+                    {
+                        if (add)
+                            GetOrAddComponent<T>().SetAllowChildren(allowChildren);
+                        else if (go.TryGetComponent(out T comp))
+                            Destroy(comp);
+                    }
+                        
+                    if (obj.TryGetBoolean("onPointerUp", out bool addEvent))
+                    {
+                        AddOrRemoveEvent<PointerUpEventHandler>(addEvent);
+                    }
+                            
+                    if (obj.TryGetBoolean("onPointerDown", out addEvent))
+                    {
+                        AddOrRemoveEvent<PointerDownEventHandler>(addEvent);
+                    }
+                            
+                    if (obj.TryGetBoolean("onPointerEnter", out addEvent))
+                    {
+                        AddOrRemoveEvent<PointerEnterEventHandler>(addEvent);
+                    }
+                            
+                    if (obj.TryGetBoolean("onPointerExit", out addEvent))
+                    {
+                        AddOrRemoveEvent<PointerExitEventHandler>(addEvent);
+                    }
+                            
+                    if (obj.TryGetBoolean("onPointerClick", out addEvent))
+                    {
+                        AddOrRemoveEvent<PointerClickEventHandler>(addEvent);
+                    }
+                            
+                    if (obj.TryGetBoolean("onDestroy", out addEvent))
+                    {
+                        AddOrRemoveEvent<OnDestroyEventHandler>(addEvent);
+                    }
+                            
+                    break;
+                }
         }
     }
 
